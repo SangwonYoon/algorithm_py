@@ -1,4 +1,4 @@
-import sys
+import sys 
 
 people = int(sys.stdin.readline())
 height = list()
