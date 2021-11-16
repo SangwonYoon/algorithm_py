@@ -40,7 +40,7 @@ while True:
                         stack.append(abs(y) % abs(x)) if y >= 0 else stack.append(-(abs(y) % abs(x)))
                     else:
                         stack.append(int(j.split()[1]))
-                if len(stack) != 1 or stack[0] > 10**9:
+                if len(stack) != 1 or abs(stack[0]) > 10**9:
                     print("ERROR")
                 else:
                     print(stack[0])
