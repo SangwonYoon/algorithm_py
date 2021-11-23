@@ -15,10 +15,19 @@ bfs 알고리즘 문제가 나왔을 때는 queue를 사용하자!
 ## 이중 배열에서 인접한 네 방향을 탐색해야 할 때
 
 ```python
+if (i != 0 and arr[i-1][j] == 0):
+if (i != M and arr[i+1][j] == 0):
+if (j != 0 and arr[i][j-1] == 0):
+if (j != N and arr[i][j+1] == 0):
+```
+
+보다는
+
+```python
 dx, dy = [-1,1,0,0], [0,0,-1,1]
 for i in range(4):
     nx, ny = dx[i] + x, dy[i] + y
-    if 0 <= nx < N and 0 <= ny < M ...
+    if 0 <= nx < N and 0 <= ny < M and arr[ny][nx] == 0:
 ```
 
 위와 같이 쓰는 방법이 더 깔끔하고 보기 좋다.
