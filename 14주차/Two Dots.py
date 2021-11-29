@@ -5,7 +5,7 @@ input = sys.stdin.readline
 
 N, M = map(int,input().split())
 dots = [[j for j in input().rstrip()] for i in range(N)]
-visited = [[0 for i in range(M)] for j in range(N)]
+visited = [[0 for i in range(M)] for j in range(N)] # dfs 알고리즘의 기본 : 방문 여부를 저장하는 배열
 
 dx, dy = [-1,1,0,0], [0,0,-1,1]
 n = 1
