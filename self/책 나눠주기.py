@@ -9,8 +9,7 @@ for i in range(int(input())):
     student = list()
     for j in range(M):
         student.append(list(map(int,input().split())))
-    student.sort(key = lambda x : x[0])
-    student.sort(key = lambda x : x[1])
+    student.sort(key = lambda x : x[1]) # b값이 큰 학생이 뒤에서 받을 수 있도록 정렬
     answer = 0
     for j in student:
         for k in range(j[0],j[1]+1):
