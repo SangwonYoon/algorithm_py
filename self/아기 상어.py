@@ -19,7 +19,6 @@ def bfs():
                 if matrix[ny][nx] == shark_size or matrix[ny][nx] == 0:
                     new_q.append([ny,nx])
                 elif matrix[ny][nx] < shark_size:
-                    print([ny,nx])
                     eatable.append([ny,nx])
     if len(eatable) > 0:
         eatable.sort(key= lambda x : x[1])
