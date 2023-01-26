@@ -28,7 +28,6 @@ for c in combinations(chicken, M):
             if temp < min_distance:
                 min_distance = temp
         chicken_distance += min_distance
-    print(answer, chicken_distance)
     if answer > chicken_distance:
         answer = chicken_distance
 
