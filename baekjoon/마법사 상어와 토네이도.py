@@ -5,7 +5,10 @@ import sys
 input = sys.stdin.readline
 
 direction = [[-1, 0], [0, 1], [1, 0], [0, -1]]
-tornado = [[0, -2, 0.02], [1, -1, 0.1], [0, -1, 0.07], [-1, -1, 0.01], [2, 0, 0.05], [1, 1, 0.1], [0, 1, 0.07], [-1, 1, 0.01], [0, 2, 0.02]]
+tornado_right = [[0, -2, 0.02], [1, -1, 0.1], [0, -1, 0.07], [-1, -1, 0.01], [2, 0, 0.05], [1, 1, 0.1], [0, 1, 0.07], [-1, 1, 0.01], [0, 2, 0.02]]
+tornado_down = [[y, x, perc] for x, y, perc in tornado_right]
+tornado_left = [[-x, -y, perc] for x, y, perc in tornado_right]
+tornado_up = [[-y, -x, perc] for x, y, perc in tornado_right]
 
 N = int(input())
 sand = [[0] * (N+4) for _ in range(2)]
@@ -19,37 +22,31 @@ for _ in range(N):
 
 sand += [[0] * (N+4) for _ in range(2)]
 
-offset = 0.5
+distance = 0.5
 
 while pos[0] != 2 or pos[1] != 2:
-    offset += 0.5
+    distance += 0.5
 
-    if int(offset) % 2 == 1 and int(offset) == offset:
+    if int(distance) % 2 == 1 and int(distance) == distance:
         d = direction[0]
-    elif int(offset) % 2 == 1 and int(offset) != offset:
+        tornado = tornado_left
+    elif int(distance) % 2 == 1 and int(distance) != distance:
         d = direction[1]
-    elif int(offset) % 2 == 0 and int(offset) == offset:
+        tornado = tornado_down
+    elif int(distance) % 2 == 0 and int(distance) == distance:
         d = direction[2]
+        tornado = tornado_right
     else:
         d = direction[3]
+        tornado = tornado_up
 
-    for _ in range(int(offset)):
+    for _ in range(int(distance)):
         pos[0] += d[0]
         pos[1] += d[1]
-        # print(f"{pos=}")
         
         amount = sand[pos[1]][pos[0]]
 
-        for t in tornado:
-            if d[0] == 0:
-                dy, dx, perc = t
-            else:
-                dx, dy, perc = t
-            
-            if sum(d) == -1:
-                dy *= -1
-                dx *= -1
-
+        for dx, dy, perc in tornado:
             moving_sand = int(sand[pos[1]][pos[0]] * perc)
             amount -= moving_sand
 
@@ -61,8 +58,6 @@ while pos[0] != 2 or pos[1] != 2:
         if pos[0] == 2 and pos[1] == 2:
             break
 
-    # print()
-
 result = 0
 
 for i in range(N+4):
@@ -70,5 +65,4 @@ for i in range(N+4):
         if i < 2 or i > N+1 or j < 2 or j > N+1:
             result += sand[i][j]
 
-# print(sand)
 print(result)
