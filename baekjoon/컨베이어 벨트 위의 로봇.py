@@ -11,8 +11,9 @@ robots = [0] * (N*2)
 belt = deque(map(list, zip(robots, durability)))
 
 turn = 0
+broken = 0
 
-while True:
+while broken < K: # phase 4
     turn += 1
 
     # phase 1
@@ -25,6 +26,8 @@ while True:
             belt[i][0] = 0
             belt[i+1][0] = 1
             belt[i+1][1] -= 1
+            if belt[i+1][1] == 0:
+                broken += 1
     
     belt[N-1][0] = 0 # 로봇 내림
 
@@ -32,10 +35,7 @@ while True:
     if belt[0][1] > 0:
         belt[0][0] = 1
         belt[0][1] -= 1
-
-    # phase 4
-    broken = [durab for _, durab in belt].count(0)
-    if broken >= K:
-        break
+        if belt[0][1] == 0:
+            broken += 1
 
 print(turn)
